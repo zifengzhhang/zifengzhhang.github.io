@@ -152,6 +152,366 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-微服务概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E8%BF%B0/">微服务概述</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2020-09-05T16:01:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="微服务架构4个核心问题"><a href="#微服务架构4个核心问题" class="headerlink" title="微服务架构4个核心问题?"></a>微服务架构4个核心问题?</h2><ol>
+<li>服务很多，客户端该怎么访问？</li>
+<li>这么多服务？服务之间如何通信</li>
+<li>这么多服务？如何治理？</li>
+<li>服务挂了怎么办？</li>
+</ol>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="SpringCloud-SpringCloud是一个生态"><a href="#SpringCloud-SpringCloud是一个生态" class="headerlink" title="SpringCloud  (SpringCloud是一个生态)"></a>SpringCloud  (SpringCloud是一个生态)</h3><h4 id="1-SpringCloud-Netfilx-一站式解决方案"><a href="#1-SpringCloud-Netfilx-一站式解决方案" class="headerlink" title="1. SpringCloud Netfilx   一站式解决方案"></a>1. SpringCloud Netfilx   <strong>一站式解决方案</strong></h4><ul>
+<li>api 网关:    zuul组件</li>
+<li>服务通信：Feign:  – HttpClient – Http通信方式，同步，阻塞</li>
+<li>服务注册发现:    Eureka</li>
+<li>熔断机制： Hystrix</li>
+</ul>
+<p>​                     ……</p>
+<h4 id="1-Apache-Dubbo-Zookeeper"><a href="#1-Apache-Dubbo-Zookeeper" class="headerlink" title="1. Apache Dubbo Zookeeper"></a>1. Apache Dubbo Zookeeper</h4><ul>
+<li>api网关：没有，找第三方组件，或者自己实现</li>
+<li>服务通信：Dubbo  RPC通信方式</li>
+<li>服务注册发现：Zookeeper</li>
+<li>熔断机制：没有，需要第三方  Hystrix</li>
+</ul>
+<p>​                  ……</p>
+<h4 id="3-SpirngCloud-Alibaba"><a href="#3-SpirngCloud-Alibaba" class="headerlink" title="3. SpirngCloud Alibaba"></a>3. SpirngCloud Alibaba</h4><ul>
+<li>api网关：zuul组件</li>
+<li>服务通信：Feign:  – HttpClient – Http通信方式，同步，阻塞</li>
+<li>服务注册发现：Eureka</li>
+<li>熔断机制：Hystrix</li>
+</ul>
+<p>​                    ……</p>
+<p><strong>新概念：服务网格 Service Mesh</strong></p>
+<h2 id="一、什么是微服务"><a href="#一、什么是微服务" class="headerlink" title="一、什么是微服务"></a>一、什么是微服务</h2><p>微服务<strong>（Microservice Architectrue）</strong>是最近几年流行的一种架构思想，关于它的概念很难一言以蔽之</p>
+<p>究竟什么是微服务呢？我们在此引用 ThoughtWorka 公司的首席科学家 <strong>Martin Fowler</strong> 于2014年发表的文章</p>
+<p><strong>[原文]：</strong>(<a target="_blank" rel="noopener" href="https://martinfowler.com/articles/microservices.html">https://martinfowler.com/articles/microservices.html</a>)</p>
+<p><strong>[译文]：</strong>(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuning8023/p/4493156.html">https://www.cnblogs.com/liuning8023/p/4493156.html</a>)</p>
+<ul>
+<li>就目前而言，对于微服务，业界并没有一个统一的，标准的定义</li>
+<li>但通常而言，微服务架构是一种架构模式，或者说是一种架构风格，<strong>它提倡将单一的应用程序分成一组小的服务</strong>，每个服务运行在其独立的自己的进程内，服务之间互相协调，互相配置，为服务提供最终价值，服务之间采用轻量级的通信机制互相沟通，每个服务都围绕着具体的业务进行构建，并且能够被独立的部署到生产环境中，另外，应尽量避免统一的，集中式的服务管理机制，对具体的一个服务而言，应根据业务上下文，选择合适的语言，工具对其进行构建，可以有一个非常轻量级的集中管理来协调这些业务，也可使用不同的语言来编写服务，也可以使用不用的数据存储。</li>
+</ul>
+<p><img src="/2020/09/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E8%BF%B0/102138238132588.png"></p>
+<p><strong>从技术维度来理解：</strong></p>
+<ul>
+<li>微服务化的核心就是讲传统的一站式应用，根据业务拆分成一个一个的服务，彻底地区耦合，每一个微服务提供单个业务功能的服务，一个服务做一件事，从技术角度看就是一种小而独立的处理过程，类似进程概念，能够自行单独启动或销毁，拥有自己独立的数据库。</li>
+</ul>
+<h2 id="二、微服务与微服务架构"><a href="#二、微服务与微服务架构" class="headerlink" title="二、微服务与微服务架构"></a>二、微服务与微服务架构</h2><ul>
+<li><p>微服务</p>
+<p>强调的是服务的大小，它关注的是某一个点，是具体解决某一个问题/提供落地地对应服务的一个服务应用，</p>
+<p>狭义的看，可以看作Eclipse里面的一个个微服务工程/或者Module</p>
+</li>
+<li><p>微服务架构</p>
+<p><strong>微服务架构</strong>是一种架构模式，它提倡将单一应用程序划分成一小组的服务，服务之间互相协调、互相配合、为用户提供最终价值。每个服务运行在其<strong>独立的自己的进程内</strong>，服务之间采用轻量级的通信机制互相沟通，每个服务复围绕着具体的业务进行构建，并且能够被独立的部署到生产环境中，另外，<strong>应尽量避免统一的、集中式的服务管理机制</strong>，对具体的一个服务而言，应根据业务上下文，选择合适的语言、工具对其进行构建。</p>
+</li>
+</ul>
+<h2 id="三、微服务优缺点"><a href="#三、微服务优缺点" class="headerlink" title="三、微服务优缺点"></a>三、微服务优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li><p>每个服务足够内聚，足够小，代码容易理解这样能聚焦一个指定的业务功能或业务需求</p>
+</li>
+<li><p>开发简单、开发效率提高，一个服务可能就是专一的只干一件事</p>
+</li>
+<li><p>微服务能够被小团队单独开发，这个小团队是2到5人的开发人员组成    </p>
+</li>
+<li><p>微服务是松耦合的，是有功能意义的服务，无论是在开发阶段或部署阶段都是独立的</p>
+</li>
+<li><p>微服务能够使用不同的语言开发</p>
+</li>
+<li><p>易于和第三方集成，微服务允许容易且灵活的方式集成自动部署，通过持续集成工具，如JenKins，Hudson，bamboo</p>
+</li>
+<li><p>微服务易于被一个开发人员理解，修改和维护，这样小团队能够更关注自己的工作成果。无需通过合作才能体现价值</p>
+</li>
+<li><p>微服务允许你利用融合最新技术</p>
+</li>
+<li><p>微服务只是业务逻辑的代码，不会和HTML,CSS会其他页面组件混合</p>
+</li>
+<li><p>每个微服务都有自己的存储能力，可以有自己的数据库。也可以有统一的数据库</p>
+</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>开发人员要处理分布式系统的复杂性</li>
+<li>多服务运维难度，随着服务的增加，运维的压力也在增大</li>
+<li>系统部署依赖</li>
+<li>服务间通信成本</li>
+<li>数据一致性</li>
+<li>系统集成测试</li>
+<li>性能监控……</li>
+</ul>
+<h2 id="四、微服务技术栈"><a href="#四、微服务技术栈" class="headerlink" title="四、微服务技术栈"></a>四、微服务技术栈</h2><table>
+<thead>
+<tr>
+<th align="center">微服务条目</th>
+<th align="center">落地技术</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务开发</td>
+<td align="center">SpringBoot、Spring、SpringMvc</td>
+</tr>
+<tr>
+<td align="center">服务配置与管理</td>
+<td align="center">Netflix公司的Archaius、阿里的Diamond等</td>
+</tr>
+<tr>
+<td align="center">服务注册与发现</td>
+<td align="center">Eureka、Consul、Zookeeper等</td>
+</tr>
+<tr>
+<td align="center">服务调用</td>
+<td align="center">Rest、RPC、gRPC</td>
+</tr>
+<tr>
+<td align="center">服务熔断器</td>
+<td align="center">Hystrix、Envoy等</td>
+</tr>
+<tr>
+<td align="center">负载均衡</td>
+<td align="center">Ribbon、Nginx等</td>
+</tr>
+<tr>
+<td align="center">服务接口调用(客户端调用服务的简化工具)</td>
+<td align="center">Feign等</td>
+</tr>
+<tr>
+<td align="center">消息队列</td>
+<td align="center">Kafka、RabbitMQ、ActiveMQ等</td>
+</tr>
+<tr>
+<td align="center">服务配置中心管理</td>
+<td align="center">SpringCloudConfig、Chel等</td>
+</tr>
+<tr>
+<td align="center">服务路由 (API网关)</td>
+<td align="center">Zuul等</td>
+</tr>
+<tr>
+<td align="center">服务监控</td>
+<td align="center">Zabbix、Nagios、Metrics、Spectator等</td>
+</tr>
+<tr>
+<td align="center">全链路追踪</td>
+<td align="center">Zipkin、Brave、Dapper等</td>
+</tr>
+<tr>
+<td align="center">服务部署</td>
+<td align="center">Docker、OpenStack、Kubernetes等</td>
+</tr>
+<tr>
+<td align="center">数据流操作开发包</td>
+<td align="center">SpringCloud Stream (封装与Redis、Rabbit、Kafka等发送接收消息)</td>
+</tr>
+<tr>
+<td align="center">事件消息总线</td>
+<td align="center">SpringCloud Bus</td>
+</tr>
+<tr>
+<td align="center">……</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="五、为什么选择SpringCloud作为微服务架构"><a href="#五、为什么选择SpringCloud作为微服务架构" class="headerlink" title="五、为什么选择SpringCloud作为微服务架构"></a>五、为什么选择SpringCloud作为微服务架构</h2><h3 id="选型依据"><a href="#选型依据" class="headerlink" title="选型依据"></a>选型依据</h3><ul>
+<li>整体解决方案和框架成熟度</li>
+<li>社区热度</li>
+<li>可维护性</li>
+<li>学习曲线</li>
+</ul>
+<h3 id="当前各大IT公司用的微服务架构有哪些？"><a href="#当前各大IT公司用的微服务架构有哪些？" class="headerlink" title="当前各大IT公司用的微服务架构有哪些？"></a>当前各大IT公司用的微服务架构有哪些？</h3><ul>
+<li><p>阿里Dubbo/HSF</p>
+</li>
+<li><p>京东JSF</p>
+</li>
+<li><p>新浪微博Motan</p>
+</li>
+<li><p>当当网DubboX</p>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+<h2 id="六、各微服务框架对比"><a href="#六、各微服务框架对比" class="headerlink" title="六、各微服务框架对比"></a>六、各微服务框架对比</h2><table>
+<thead>
+<tr>
+<th align="center">功能点/服务框架</th>
+<th align="center">Netflix/Spring Cloud</th>
+<th align="center">Motan</th>
+<th align="center">gRPC</th>
+<th align="center">Thrift</th>
+<th align="center">Dubbo/DubboX</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">功能定位</td>
+<td align="center">完整的微服务框架</td>
+<td align="center">RPC框架，但整合了ZK或Consul，实现集群环境的基本服务注册/发现</td>
+<td align="center">RPC框架</td>
+<td align="center">RPC框架</td>
+<td align="center">服务框架</td>
+</tr>
+<tr>
+<td align="center">支持Rest</td>
+<td align="center">是，Ribbon支持多种可拔插的序列化选择</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">支持PRC</td>
+<td align="center">否</td>
+<td align="center">是（Hession2）</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">支持多语言</td>
+<td align="center">是（Rest形式)？</td>
+<td align="center">否</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">负载均衡</td>
+<td align="center">是（微服务zuul+客户端Ribbon）zuul-服务，动态路由，云端负载均衡Eureka（针对中间层服务器）</td>
+<td align="center">是（客户端）</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">是（客户端）</td>
+</tr>
+<tr>
+<td align="center">配置服务</td>
+<td align="center">Netflix Archaius、SpringCloud Config Server集中配置</td>
+<td align="center">是（Zookeeper）提供</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">服务调用链监控</td>
+<td align="center">是（zuul）zuul提供边缘服务，API网关</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">高可用/容错</td>
+<td align="center">是（服务端Hystrix+客户端Ribbon）</td>
+<td align="center">是（客户端）</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">是（客户端）</td>
+</tr>
+<tr>
+<td align="center">典型应用案例</td>
+<td align="center">Netflix</td>
+<td align="center">Sina</td>
+<td align="center">Google</td>
+<td align="center">Facebook</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">社区活跃度</td>
+<td align="center">高</td>
+<td align="center">一般</td>
+<td align="center">高</td>
+<td align="center">一般</td>
+<td align="center">2017年后重新开始维护，之前中断了五年</td>
+</tr>
+<tr>
+<td align="center">学习难度</td>
+<td align="center">中断</td>
+<td align="center">低</td>
+<td align="center">高</td>
+<td align="center">高</td>
+<td align="center">低</td>
+</tr>
+<tr>
+<td align="center">文档丰富程度</td>
+<td align="center">高</td>
+<td align="center">一般</td>
+<td align="center">一般</td>
+<td align="center">一般</td>
+<td align="center">高</td>
+</tr>
+<tr>
+<td align="center">其他</td>
+<td align="center">SpringCloud Bus为我们应用程序带来了更多管理端点</td>
+<td align="center">支持降级</td>
+<td align="center">Netflix内部在开发集成gRPC</td>
+<td align="center">IDL定义</td>
+<td align="center">实践的公司比较多</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Spring Cloud</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E8%BF%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-解决hexo图片不显示问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -250,6 +610,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -321,6 +692,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -521,6 +903,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Spring Cloud</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
